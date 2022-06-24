@@ -1,11 +1,10 @@
 export const hasPermissionForAndroid = async (params) =>
 {
-  const { type, version, PermissionsAndroid } = params;
-    if (version < 23) {
+  const { Platform, PermissionsAndroid } = params;
+  if (Platform.Version < 23) {
       return true;
     }
-    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', PermissionsAndroid);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', typeof PermissionsAndroid);
+
     /*const hasPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
     if (hasPermission) {
@@ -13,7 +12,8 @@ export const hasPermissionForAndroid = async (params) =>
     }
 */
     const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-    if (status === PermissionsAndroid.RESULTS.GRANTED) {
+  if (status === PermissionsAndroid.RESULTS.GRANTED) {
+    console.log('ANDROID GRANTED STATUS');
       return true;
     }
 
@@ -25,5 +25,3 @@ export const hasPermissionForAndroid = async (params) =>
     return false;
 };
   
-// module.exports = { hasPermissionForAndroid };
-// 22,24
